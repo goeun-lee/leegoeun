@@ -2,47 +2,76 @@
 <html lang="ko">
  <head>
   <meta charset="utf-8" />
-  <title> popup </title>
+  <title> template5 </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<style>
+	*{margin:0; padding:0;}
+	li{list-style:none;}
+	body{background-color:#333;}
 
+	h2{text-align:center; padding:50px 0; text-transform:uppercase; font-size:26px; color:#aa0;}
 
+	div{width:1200px; height:450px; margin:50px auto 0; outline:5px solid #1a1d43; overflow:hidden; position:relative;}
+
+	ul{width:100%;}
+	ul li{
+		width:300px; height:450px; background-color:rgba(250,0,0,1); position:absolute; left:0; top:0; outline:1px solid #1a1d43; background-size:100% 100%; transition:all .7s ease .2s;
+		/* jQuery의 mouseover 와 연결되어 있음 */
+	}
+
+	.w0{background-image:url("img/joker.jpg"); z-index:3;}
+	.w1{background-image:url("img/harleyQuinn.jpg"); z-index:2;}
+	.w2{background-image:url("img/deadshot.jpg"); z-index:1;}
+	.w3 img{
+		width:100%; height:100%; transition:all 0.7s ease 0.2s;
+		/* jQuery의 퍼지는 효과와 연결*/
+	}
+
+</style>
+<script>
+	$(function(){
+		/*
+			중요 ) offset().top,	offset().left의 경우
+			부모요소에 상속받는 거리만큼 움직이기 때문에 문제가 발생함!
+
+			offset().top	and     offset().left의 경우 브라우저를 따라다니도록
+			설정해주어야 함!
+		*/
+		
+		$(".w0").mouseover(function(){
+			$("h2").text("joker");
+			$(".w1").css({"left":$(this).width()});
+		});
+		$(".w1").mouseover(function(){
+			$("h2").text("harleyQuinn");
+			$(".w2").css({"left":$(this).width()*2});
+		});
+		$(".w2").mouseover(function(){
+			$("h2").text("deadshot");
+			$(".w3").css({"left":$(this).width()*3});
+		});
+
+		$(".w3 img").mouseover(function(){
+			$("h2").text("diablo");
+			$("div").css({"overflow":"visible"});
+			$(this).css({"transform":"scale(1.5)","opacity":"0"});
+			$(this).parent().css({"backgroundImage":"url('img/diablo.jpg')"});
+		});
+	});
+</script>
 </head>
 
  <body>
-	<h2>모달팝업 VS 팝업창</h2>
-	<p>
-		1) 모달팝업 : 주소줄이 없고, 사용자가 직접 창을 만들어서 사용하는 기능<br/>
-		2) 팝업창 : 주소줄이 있고, window창이 뜨는 형태<br/>
-	</p>
-	<h2>window_open1</h2>
-	<a href="http://www.naver.com" title="네이버" onclick="windowOpen1(); return false;">네이버로 이동</a>
-	<script>
-		function windowOpen1(){
-			/* 
-				기본 사용방법 : window.open(url, name, spec) 
-				spec은 창의 크기나, 창의 위치
-
-				+ 스타일 영역이 아닐 경우, 단위제외
-				+ name부분에 글자 대신 _blank를 설정하면 새 창으로 계속 열림
-			*/
-
-			window.open("http://www.naver.com", "네이버", "width=250, height=250");
-
-			alert(1);
-		};
-	</script>
-	<!-- 위와 같은 방법으로 구글로 넘기기 -->
-	<a href="#none" title="구글" onclick="windowOpen2();">구글로 이동</a>
-	<script>
-		function windowOpen2(){
-			window.open("http://www.google.com", "_blank","width=250,  height=250");
-		}
-	</script>
-	<!-- 위와 같은 방법으로 다음 연결하기 -->
-	<a href="#none" title="다음" onclick="windowOpen3();">다음으로 이동</a>
-	<script>
-		function windowOpen3(){
-			window.open("http://daum.net","_blank","width=250, height=250, left=100, top=100");
-		}
-	</script>
+	<h2>image diablo</h2>
+	<div>
+		<ul>
+			<li class="w0"></li>
+			<li class="w1"></li>
+			<li class="w2"></li>
+			<li class="w3">
+				<img src="img/diablo.jpg" alt="디아블로 이미지"/>
+			</li>
+		</ul>
+	</div>
  </body>
 </html>
