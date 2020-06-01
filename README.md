@@ -68,6 +68,7 @@
 			<li class="w0"></li>
 			<li class="w1"></li>
 			<li class="w2"></li>
+			<li class="w2"></li>
 			<li class="w3">
 				<img src="img/diablo.jpg" alt="디아블로 이미지"/>
 			</li>
